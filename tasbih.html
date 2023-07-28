@@ -8,24 +8,35 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .container {
+            margin-top: 15%;
+            background: linear-gradient(rgba(163, 91, 91, 0.74), rgba(120, 120, 153, 0.886)), url('https://picsum.photos/200/300');
+            padding: 20px;
+            height: 40vh;
+            width: 50%;
+            border: 4px dashed blue;
+        }
+    </style>
 
     <title>Tasbih</title>
 
 </head>
 
-<body>
-    <div class="container mt-5">
-        <h1 class="text-center">Tasbih</h1>
-        <div class="text-center">
-            
-            <h4 class="" style="height: 10rem;">
-                Current Number:
-                <br> <span id="numberDisplay">0</span>
-            </h4>
-            <button id="incrementBtn" class="btn btn-primary mr-2">Increment</button>
-            <button id="resetBtn" class="btn btn-danger">Reset</button>
+<body class="bg-dark">
+    <center>
+        <div class="container text-light">
+                <h1 class="text-center">Tasbih</h1>
+                <h4 class="" style="height: 10rem;">
+                    Current Number:
+                    <br>
+                    <span id="numberDisplay">0</span>
+                </h4>
+                <button id="incrementBtn" class="btn btn-primary ">Increment</button>
+                <button id="resetBtn" class="btn btn-danger">Reset</button>
+                <button id="decrementBtn" class="btn btn-danger">decrement</button>
         </div>
-    </div>
+    </center>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -44,6 +55,13 @@
         $('#incrementBtn').click(function () {
             number++;
             updateNumberDisplay();
+        });
+        $('#decrementBtn').click(function () {
+            if (number > 0) {
+                number--;
+
+                updateNumberDisplay();
+            }
         });
 
         // Reset button click handler

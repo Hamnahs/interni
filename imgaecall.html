@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <center>
+        <img style="width: 300px; height: 300px; overflow: hidden;" src="" alt="" id="randomimg">
+        <button id="refreshButton">Refresh</button>
+    </center>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+<script>
+    $(document).ready(function (e) {
+        var randomnum = Math.floor(Math.random() * 10);
+
+        $.ajax({
+            type: 'GET',
+            url: `https://api.slingacademy.com/v1/sample-data/photos/${randomnum}`,
+
+            success: function (success) {
+                console.log("success")
+
+                $("#randomimg").attr('src', success.photo.url)
+
+                // $('#randomimg').prop('src', success.photo.url)
+            },
+
+            error: function (error) {
+                console.log(error)
+            }
+        });
+
+        $("#refreshButton").on("click", function () {
+            location.reload(true);
+        });
+    });
+</script>
+
+</html>
