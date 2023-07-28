@@ -8,65 +8,40 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Document</title>
 </head>
 
-<body class="m-5">
-    <section class="border border-3">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-4" style="background-color: rgb(44, 69, 90);"></div>
-                <div class="col-8 bg-light">
-                    <p> </p>
-                </div>
-            </div>
-            <div class="row d-flex align-item-center justify-content-center position-relative"
-                style="height: 80px; background-color: rgb(27, 164, 214); color: white;">
-                <div>
-                    <h2>Hamna Shafiq</h2>
-                    <p>Web developer</p>
-                </div>
-                <img class="img-fluid position-absolute border border-light border-5 bg-dark"
-                    style="height: 200px; width: 200px; left: 70%;" src="https://picsum.photos/200" alt="">
-            </div>
-            <div class="row" style="height: 100vh;">
-                <div class="col-4" style="background-color: rgb(44, 69, 90);">
-                    <div id="genderDiv">
-                        <i class="fas fa-venus-mars"></i> Gender
-                    </div>
+<body>
+    <select class="form-select options" aria-label="Default select example">
 
-                    <div id="dateDiv">
-                        <i class="far fa-calendar-alt"></i> Date
-                    </div>
-
-                    <div id="phoneDiv">
-                        <i class="fas fa-phone"></i> Phone
-                    </div>
-
-                    <div id="emailDiv">
-                        <i class="far fa-envelope"></i> Email
-                    </div>
-
-                    <div id="websiteDiv">
-                        <i class="fas fa-globe"></i> Website
-                    </div>
-
-                    <div id="locationDiv">
-                        <i class="fas fa-map-marker-alt"></i> Location
-                    </div>
-                </div>
-                <div class="col-8 bg-light">
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Link jQuery and Bootstrap JS here -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    </select>
 </body>
+
+<script>
+    $.ajax({
+        type: 'GET',
+        url: 'https://restcountries.com/v3.1/all?fields=name,flags',
+
+        success: function (success) {
+            success.sort((a, b) => a.name.common.localeCompare(b.name.common));
+            success.forEach(value => {
+                const option = appendcountries(value);
+                $('.options').append(option);
+            });
+        },
+
+        error: function (error) {
+            console.log(error)
+        }
+    });
+
+    const appendcountries = country => {
+        return `<option ${country.name.common === "Pakistan" ? "selected" : ""}>
+            <img src="${country.flags.png}" alt="">
+            <span>${country.name.common}</span>
+        </option>`;
+    }
+</script>
 
 </html>
